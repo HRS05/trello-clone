@@ -4,7 +4,7 @@ const projectController = require("../Controller/projectController")();
 const auth = require("../Middleware/auth")
 
 const projectAPI = () => {
-    router.post("/createProject",projectController.createProject);
+    router.post("/createProject",auth,projectController.createProject);
 
     return router;
 }

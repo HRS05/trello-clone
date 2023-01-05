@@ -9,7 +9,6 @@ const projectAPI = require("./API/projectAPI")();
 const taskAPI = require("./API/taskAPI")();
 
 require('dotenv').config();
-//const auth = require("../Middleware/auth")
 
 const dbConnection = require("./DBConnection/db");
 const { API_PORT } = process.env;

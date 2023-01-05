@@ -1,6 +1,5 @@
 const express = require("express");
 const userDetailsModel = require("../Model/userDetailsModel");
-const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
@@ -28,6 +27,7 @@ const userService = () => {
                 u = await user.save();
             }catch(e)
             {
+                throw new Error("adding user error -->  "+ e);
                 return {status : 400, message : {result : "adding user error -->  "+ e }}
             }
             
@@ -39,8 +39,11 @@ const userService = () => {
                 }
               );
               // save user token
-              u.token = token;
-              return {status : 200, message : {result : "User created ", data : u}};
+              let response={};
+              response.createdProject = user.createdProject;
+              response.joinedProject = user.joinedProject;
+              response.token = token;
+              return {result : "User created ", data : u};
               //console.log("return after adding "+ p);
 
         },
@@ -53,7 +56,7 @@ const userService = () => {
             const user = await userDetailsModel.findOne({ emailId });
 
             if (!(user && (await bcrypt.compare(password, user.password)))){
-                return {status : 400, message : {result : "Invalid User "+emailId+"  "+password}};
+                throw new Error("Invalid User "+emailId+"  "+password);
             }
                 // Create token
                 console.log("User ::--->>> " + user);
@@ -69,52 +72,9 @@ const userService = () => {
                 response.createdProject = user.createdProject;
                 response.joinedProject = user.joinedProject;
                 response.token = token;
-                return {status : 200, message : {result : "logged IN", data : response}};
+                return {result : "logged IN", data : response};
 
         },
-
-        checkUserByUserId : async (userID) => {
-            try{
-                let user = await userDetailsModel.findOne({"_id" : userID });
-                if (!(user)){
-                    return false;
-                }
-            }catch(e){
-                return false;
-            }
-            return true;
-        },
-
-        updateUserCreatedProject : async (userId,projectDetails) => {
-            try{
-                let user = await userDetailsModel.updateOne(
-                    { _id: userId },
-                    { $push: { createdProject : projectDetails } }
-                 );
-                if (!(user)){
-                    return false;
-                }
-            }catch(e){
-                console.log(e);
-                return false;
-            }
-            return true;
-        },
-        updateUserJoinedProject : async (userId,projectDetails) => {
-            try{
-                let user = await userDetailsModel.updateOne(
-                    { _id: userId },
-                    { $push: { joinedProject : projectDetails } }
-                 );
-                if (!(user)){
-                    return false;
-                }
-            }catch(e){
-                console.log(e);
-                return false;
-            }
-            return true;
-        }
 
     };
 }
