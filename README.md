@@ -17,7 +17,7 @@ Create clone of Trello implement following features :
 * Also used proper Authentication using JWT token.
 
 ### Schema Design
-Used three tables for solving the problem :   
+Created three tables for solving the problem :   
 1. userDeatilsModel
 2. projectInfoModel
 3. taskInfoModel
@@ -77,9 +77,14 @@ Relation between all the tables :
 ```
 ## API Decription
 
+### Base URL
+```
+http://localhost:3000
+```
+
 ### User Registration
 ```
-http://localhost:3000/api/user/registerUser
+/api/user/registerUser
 ```
 * request type :- post 
 * After registration, the response will contain jwt token and two arrays that contain information about created projects and joined projects of the user (both the array is empty in the registration case), now the user will divert to a page that shows cards of projects.
@@ -114,7 +119,7 @@ http://localhost:3000/api/user/registerUser
 
 ### User Login
 ```
-http://localhost:3000/api/user/loginUser
+/api/user/loginUser
 ```
 * request type :- post 
 * After login, the response will contain jwt token and two arrays that contain information about created projects and joined projects of the user, now the user will divert to a page that shows cards of projects.
@@ -156,7 +161,7 @@ http://localhost:3000/api/user/loginUser
 
 ### Create Project
 ```
-http://localhost:3000/api/project/createProject
+/api/project/createProject
 ```
 * request type :- post 
 * below API used to create a project for collaboration.
@@ -192,7 +197,7 @@ http://localhost:3000/api/project/createProject
 
 ### Create Task
 ```
-http://localhost:3000/api/task/createTask
+/api/task/createTask
 ```
 * request type :- post 
 * below API used to create tasks in the project for assigning to the user.
@@ -222,7 +227,7 @@ http://localhost:3000/api/task/createTask
 
 ### Update Task
 ```
-http://localhost:3000/api/task/updateTask
+/api/task/updateTask
 ```
 * request type :- post 
 * below API used to update existing tasks in a project.
@@ -237,7 +242,7 @@ http://localhost:3000/api/task/updateTask
     "assigneedBy" : "Harsh Sharma",
     "stage" : "In Progress",
     "assigneeId" : "63b5dfb50131841dec96638f",
-    "assignee" : "pankaj udas",
+    "assignee" : "pankaj vyas",
     "dueDate" : "05-01-2023",
     "description" : "this is first task assiging",
     "likeInfo" : [
@@ -282,7 +287,7 @@ http://localhost:3000/api/task/updateTask
 
 ### Get Tasks for project
 ```
-http://localhost:3000/api/task/getTasks
+api/task/getTasks
 ```
 * request type :- post 
 * when the user will click on a particular project so, this API will get called and in response, the contains an array of all tasks for that particular project.
@@ -341,7 +346,7 @@ http://localhost:3000/api/task/getTasks
                     "createdAt": "2023-01-05T15:30:43.782Z",
                     "updatedAt": "2023-01-06T07:02:47.910Z",
                     "__v": 2,
-                    "assignee": "pankaj udas"
+                    "assignee": "pankaj vyas"
                 },
             ],
             "done": [],
@@ -369,7 +374,7 @@ http://localhost:3000/api/task/getTasks
 
 ### Change stage(backlog, ready, done and in progress) of task
 ```
-http://localhost:3000/api/task/changeTaskStage
+/api/task/changeTaskStage
 ```
 * request type :- post 
 * when dragging a task from one stage to another stage happens on the UI side so, this API will use to update the task's stage in DB.
