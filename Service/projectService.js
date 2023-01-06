@@ -54,8 +54,6 @@ const projectService = () => {
                 projectDetails.description = p.description;
                 await userUtils.updateUserJoinedProject(m.memberId,projectDetails);
             }
-
-
             return {result : "project is created for collaboration" }
 
 

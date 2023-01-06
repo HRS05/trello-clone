@@ -7,6 +7,8 @@ const taskAPI = () => {
     router.post("/createTask",auth,taskController.createTask);
     router.post("/getTasks",auth,taskController.getTasks);
     router.post("/changeTaskStage",auth,taskController.changeTaskStage);
+    router.post("/updateTask",auth,taskController.updateTask);
+    
     return router;
 }
 

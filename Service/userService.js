@@ -43,7 +43,7 @@ const userService = () => {
               response.createdProject = user.createdProject;
               response.joinedProject = user.joinedProject;
               response.token = token;
-              return {result : "User created ", data : u};
+              return {result : "User created ", data : response};
               //console.log("return after adding "+ p);
 
         },

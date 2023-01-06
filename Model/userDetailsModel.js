@@ -14,7 +14,6 @@ var userSchema = new mongoose.Schema(
        password : String,
        companyId : String,
        companyName : String,
-       token : String,
     },
     { timestamps: true }
 );
