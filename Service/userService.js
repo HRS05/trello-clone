@@ -7,9 +7,6 @@ require("dotenv").config();
 const userService = () => {
   return {
     registerUserUtil: async (req) => {
-      //add user to db
-      //create transaction of user using payment id
-
       let user = new userDetailsModel();
       user.name = req?.body?.name?.trim();
       user.age = req?.body?.age;
@@ -37,7 +34,6 @@ const userService = () => {
       response.joinedProject = user.joinedProject;
       response.token = token;
       return { result: "User created ", data: response };
-      //console.log("return after adding "+ p);
     },
 
     loginUserUtil: async (req) => {
@@ -48,8 +44,6 @@ const userService = () => {
       if (!(user && (await bcrypt.compare(password, user.password)))) {
         throw new Error("Invalid User " + emailId + "  " + password);
       }
-      // Create token
-      console.log("User ::--->>> " + user);
       const token = jwt.sign(
         { user_id: user._id, emailId },
         process.env.TOKEN_KEY,
